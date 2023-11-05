@@ -1,7 +1,11 @@
-package com.argo;
+package com.argo.service.utils;
+
+import org.springframework.stereotype.Component;
 
 import static java.lang.Math.abs;
 
+
+@Component
 public class CodeUtils {
     public String generator(String phoneNo){
         int hash =  phoneNo.hashCode();
