@@ -1,6 +1,7 @@
 package com.argo.service.impl;
 
 
+import com.argo.domain.VerificationCode;
 import com.argo.service.VerificationService;
 import com.argo.service.utils.CodeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,15 @@ public class VerificationServiceImpl implements VerificationService {
     }
 
     @Override
-    public boolean verifyCode(String code) {
-        return false;
+    public boolean verifyCode(VerificationCode verificationCode) {
+        //取出内存中验证码，与传递的验证码比对
+        String code = verificationCode.getCode();
+        String cacheCode = getCodeFromCache(verificationCode.getPhoneNo());
+        return cacheCode.equals(code);
+    }
+
+    @Cacheable(value = "VerificationCode", key = "#phoneNo")
+    public String getCodeFromCache(String phoneNo){
+        return null;
     }
 }
