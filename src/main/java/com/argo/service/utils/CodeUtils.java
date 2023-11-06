@@ -1,5 +1,6 @@
 package com.argo.service.utils;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 import static java.lang.Math.abs;
@@ -13,6 +14,11 @@ public class CodeUtils {
         long curTime = System.currentTimeMillis();
         int result  = abs((int) (hash ^ encryption ^ curTime));
         return (String.format("%06d", result % 1000000));
+    }
+
+    @Cacheable(value = "VerificationCode", key = "#phoneNo")
+    public String getCodeFromCache(String phoneNo){
+        return null;
     }
 
 }

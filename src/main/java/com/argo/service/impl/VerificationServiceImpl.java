@@ -26,12 +26,10 @@ public class VerificationServiceImpl implements VerificationService {
     public boolean verifyCode(VerificationCode verificationCode) {
         //取出内存中验证码，与传递的验证码比对
         String code = verificationCode.getCode();
-        String cacheCode = getCodeFromCache(verificationCode.getPhoneNo());
-        return cacheCode.equals(code);
+        String cacheCode = codeUtils.getCodeFromCache(verificationCode.getPhoneNo());
+        System.out.println("code in memory:" + cacheCode + "code in commit:" + code);
+        return code.equals(cacheCode);
     }
 
-    @Cacheable(value = "VerificationCode", key = "#phoneNo")
-    public String getCodeFromCache(String phoneNo){
-        return null;
-    }
+
 }

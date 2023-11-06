@@ -28,8 +28,7 @@ public class VerificationController {
 
     @PostMapping
     public boolean verifyCode(VerificationCode code){
-        verificationService.verifyCode(code);
-        return false;
+        return verificationService.verifyCode(code);
     }
 
 }
